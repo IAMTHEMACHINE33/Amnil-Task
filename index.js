@@ -11,6 +11,9 @@ app.use(express.urlencoded({extended: true}))
 const userRoute = require("./routes/user");
 app.use("/users", userRoute);
 
+const productRoute = require("./routes/product");
+app.use("/products",productRoute);
+
 app.listen(9000,() => {
     console.log("Server running on 9000")
 })

@@ -20,6 +20,15 @@ const createUserTable = () => {
     })
 }
 
+const createProductTable = () => {
+    return pool.query('create table if not exists products_table(id serial primary key, product_name varchar(30), price int, qty int)', (err ,result) => {
+        if (err)
+        {
+            console.log("Err : ",err)
+        }
+    })
+}
+
 const addUser = async (userId, firstname, lastname, username, password, role) => {
     let response;
     const query = pool.query(`insert into users_table(id, firstname, lastname, username, role) values*${userId}, ${firstname}, ${lastname}, ${username}, ${password}, ${role}`, (err, result) => {
@@ -48,5 +57,6 @@ const deleteTable = async () => {
 };
 
 createUserTable();
+createProductTable();
 // deleteTable();
 module.exports = pool;
