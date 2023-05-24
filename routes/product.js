@@ -20,4 +20,17 @@ router.get("/get/:product_name", async (req, res) => {
     res.send(product.rows)
 })
 
+router.put("/update/:product_name", async (req, res) => {
+    const { price, qty } = req.body;
+    const product_name = req.params.product_name;
+    const update_data = await db.query("UPDATE products_table SET price = $1, qty = $2 WHERE product_name = $3", [price, qty, product_name]);
+    res.send("Product updated");
+})
+
+router.delete("/delete/:product_name", async (req, res) => {
+    const product_name = req.params.product_name;
+    const delete_data = await db.query("DELETE FROM products_table WHERE product_name = $1 ", [product_name]);
+    res.send("Deleted");
+})
+
 module.exports = router;
